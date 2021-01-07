@@ -8,11 +8,11 @@
 
     <span class="company">{{job.company}}</span> <span class="new">New!</span> <span class="featured">Featured</span>
     </div>
-    <p>{{job.position}}</p>
+    <p class="position">{{job.position}}</p>
     <div>
-      <span>{{job.postedAt}}</span> <span>{{job.contract}}</span> <span>{{job.location}}</span> 
+      <span>{{job.postedAt}}</span> <span>&bull;</span> <span>{{job.contract}}</span> <span>&bull;</span> <span>{{job.location}}</span> 
       <hr>
-    <div>
+    <div class="filter-items">
       <span class="tag" @click="onTagSelect(job.role, 'roles')">{{job.role}}</span>
        <span class="tag" @click="onTagSelect(job.level, 'levels')">{{job.level}}</span>
       <span
@@ -66,6 +66,7 @@ export default {
     margin-bottom: 2rem;
     background-color: #fff;
     border-left: 4px solid $desaturatedDarkCyan;
+     text-align: left;
     border-radius: 4px;
      box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
      padding: 1rem;
@@ -83,5 +84,34 @@ export default {
 
   .tag {
     margin-left: 1rem;
+    padding: 5px;
+    background-color: $lightGrayishCyan;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+  }
+  .new {
+    background-color: cyan;
+    padding: .1rem .6rem;
+    border-radius: 12px;
+    text-transform: uppercase;
+    font-size: .8rem;
+  }
+
+   .featured {
+    background-color: grey;
+    color: white;
+    padding: .1rem .6rem;
+    border-radius: 12px;
+    text-transform: uppercase;
+    font-size: .8rem;
+  }
+  .position {
+    font-weight: 700;
+    color: grey;
+  }
+  .filter-items {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
   }
 </style>
