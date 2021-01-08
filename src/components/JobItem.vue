@@ -5,12 +5,15 @@
     </div>
    
     <div class=company-info>
+    <div class="top-line">
+      <span class="company">{{job.company}}</span> <span v-if="job.new" class="new">New!</span> <span v-if="job.featured" class="featured">Featured</span>
+    </div>
 
-    <span class="company">{{job.company}}</span> <span v-if="job.new" class="new">New!</span> <span v-if="job.featured" class="featured">Featured</span>
+    
     
     <p class="position">{{job.position}}</p>
     
-      <span>{{job.postedAt}}</span> <span>&bull;</span> <span>{{job.contract}}</span> <span>&bull;</span> <span>{{job.location}}</span> 
+      <span>{{job.postedAt}}</span> <span class="seperator">&bull;</span> <span>{{job.contract}}</span> <span class="seperator">&bull;</span> <span>{{job.location}}</span> 
       <hr class="horizontal-rule">
     </div>
     <div class="filter-items">
@@ -83,9 +86,20 @@ export default {
     }
   }
 
+   .top-line {
+    @include respond(tab-port) {
+     margin-bottom: .5rem;
+    }
+  }
+
   .company {
     font-weight: 700;
     color: $desaturatedDarkCyan;
+    margin-right: .6rem;
+
+    @include respond(tab-port) {
+     margin-bottom: .5rem;
+    }
   }
 
   .new {
@@ -96,6 +110,7 @@ export default {
     font-size: .8rem;
     color: hsl(180, 31%, 95%);
     font-weight: 700;
+    margin-right: .5rem;
   }
 
    .featured {
@@ -108,6 +123,13 @@ export default {
     font-weight: 700;
   }
 
+  .seperator {
+     @include respond(tab-port) {
+      margin-left: .5rem;
+      margin-right: .5rem;
+    }
+  }
+
   .horizontal-rule {
     margin-top: 1rem;
     @include respond(tab-port) {
@@ -116,17 +138,21 @@ export default {
   }
 
   .tag {
-    margin-left: 1rem;
+    margin-right: .8rem;
     padding: 5px 10px;
     background-color: $lightGrayishCyan;
     border-radius: 5px;
     margin-bottom: 1rem;
     font-weight: 700;
+    font-size: .8rem;
     color: $desaturatedDarkCyan;
 
     &:hover{
       background-color: $desaturatedDarkCyan;
       color: $lightGrayishCyan;
+    }
+    @include respond(tab-port) {
+     font-size: 1rem;
     }
   }
   

@@ -38,6 +38,7 @@ export default {
   @include respond(tab-port) {
     background: url(../public/images/bg-header-desktop.svg) no-repeat top center;
     background-color: $desaturatedDarkCyan;
+    background-size: cover;
   }
 }
 </style>
