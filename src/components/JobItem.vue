@@ -1,17 +1,18 @@
 <template>
-  <li class="item-container">
+  <li class="item-container" v-bind:class="{ 'feature-selected': job.featured }">
     <div>
-        <img class="img" :src="job.logo" />
+        <img class="img" :src="job.logo" alt="job.company"/>
     </div>
    
-    <div>
+    <div class=company-info>
 
-    <span class="company">{{job.company}}</span> <span class="new">New!</span> <span class="featured">Featured</span>
-    </div>
+    <span class="company">{{job.company}}</span> <span v-if="job.new" class="new">New!</span> <span v-if="job.featured" class="featured">Featured</span>
+    
     <p class="position">{{job.position}}</p>
-    <div>
+    
       <span>{{job.postedAt}}</span> <span>&bull;</span> <span>{{job.contract}}</span> <span>&bull;</span> <span>{{job.location}}</span> 
-      <hr>
+      <hr class="horizontal-rule">
+    </div>
     <div class="filter-items">
       <span class="tag" @click="onTagSelect(job.role, 'roles')">{{job.role}}</span>
        <span class="tag" @click="onTagSelect(job.level, 'levels')">{{job.level}}</span>
@@ -26,11 +27,6 @@
         :tool="tool"
         :key="tool" v-for="tool in job.tools">{{tool}}</span>
     </div>
-    </div>
-    <!-- <hr >
-      <p class="short-link">{{url.short_link}}</p> 
-      <button v-if="this.copied === false" @click="onClick" class="button copy-button">Copy   </button>
-      <button v-else class="button copied-button">Copied!</button> -->
   </li>
 </template>
 
@@ -42,20 +38,8 @@ export default {
     onTagSelect(tag, v) {
       console.log('tag', tag, v)
       this.$emit("tagSelect", tag, v);
-      // this.$emit("videoSelect", video);
-      
     },
   },
-  // data() {
-  //   return {
-  //     copied: false
-  //   }
-  // },
-//   methods: {
-//     onClick: function(){
-//       this.copied = true;
-//     }
-// }
 };
 </script>
 
@@ -65,49 +49,90 @@ export default {
     margin: auto;
     margin-bottom: 2rem;
     background-color: #fff;
-    border-left: 4px solid $desaturatedDarkCyan;
      text-align: left;
     border-radius: 4px;
-     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+     box-shadow: 0px 3px 15px  hsla(180, 29%, 50%, .3);
      padding: 1rem;
 
+    @include respond(tab-port) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .feature-selected {
+    border-left: 4px solid $desaturatedDarkCyan;
   }
 
   .img {
     margin-top: -2rem;
     width: 50px;
+    margin-bottom: .6rem;
+
+    @include respond(tab-port) {
+      margin-top: 0;
+      width: 90px;
+    }
+  }
+
+  .company-info {
+    @include respond(tab-port) {
+      margin-right: auto;
+      margin-left: 4rem;
+    }
   }
 
   .company {
     font-weight: 700;
+    color: $desaturatedDarkCyan;
+  }
+
+  .new {
+    background-color: $desaturatedDarkCyan;
+    padding: .2rem .6rem;
+    border-radius: 12px;
+    text-transform: uppercase;
+    font-size: .8rem;
+    color: hsl(180, 31%, 95%);
+    font-weight: 700;
+  }
+
+   .featured {
+    background-color: black;
+    color: white;
+    padding: .2rem .6rem;
+    border-radius: 12px;
+    text-transform: uppercase;
+    font-size: .8rem;
+    font-weight: 700;
+  }
+
+  .horizontal-rule {
+    margin-top: 1rem;
+    @include respond(tab-port) {
+      display: none;
+    }
   }
 
   .tag {
     margin-left: 1rem;
-    padding: 5px;
+    padding: 5px 10px;
     background-color: $lightGrayishCyan;
-    border-radius: 3px;
+    border-radius: 5px;
     margin-bottom: 1rem;
-  }
-  .new {
-    background-color: cyan;
-    padding: .1rem .6rem;
-    border-radius: 12px;
-    text-transform: uppercase;
-    font-size: .8rem;
-  }
+    font-weight: 700;
+    color: $desaturatedDarkCyan;
 
-   .featured {
-    background-color: grey;
-    color: white;
-    padding: .1rem .6rem;
-    border-radius: 12px;
-    text-transform: uppercase;
-    font-size: .8rem;
+    &:hover{
+      background-color: $desaturatedDarkCyan;
+      color: $lightGrayishCyan;
+    }
   }
+  
   .position {
     font-weight: 700;
-    color: grey;
+    color: black;
   }
   .filter-items {
     margin-top: 1rem;

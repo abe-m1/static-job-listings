@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <List msg="Welcome to Your Vue.js App"/>
+    <div class="top-design"></div>
+    <List />
   </div>
 </template>
 
@@ -21,9 +22,22 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: $cyan;
-  margin-top: 60px;
+  color: $darkGrayishCyan;
+  height: 100%;
   background-color: $lightGrayishCyan;
-  height: 100vh;
+}
+
+.top-design {
+  width: 100%;
+  background: url(../public/images/bg-header-mobile.svg) no-repeat top center;
+  background-size: cover;
+  height: 10rem;
+  background-color: $desaturatedDarkCyan;
+  margin-bottom: 3rem;
+
+  @include respond(tab-port) {
+    background: url(../public/images/bg-header-desktop.svg) no-repeat top center;
+    background-color: $desaturatedDarkCyan;
+  }
 }
 </style>
